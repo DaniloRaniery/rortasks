@@ -6,7 +6,11 @@
   <thead>
     <tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-      <th><div><%= attribute.human_name %></div></th>
+        <% if attribute.type == :integer or attribute.type == :date -%>
+          <th><div  class = 'w3-center'><%= attribute.human_name %></div></th>
+        <% else -%>
+          <th><div><%= attribute.human_name %></div></th>
+        <% end -%>
 <% end -%>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +20,11 @@
     <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
       <tr>
 <% attributes.reject(&:password_digest?).each do |attribute| -%>
-        <td><div><%%= <%= singular_table_name %>.<%= attribute.name %> %></div></td>
+        <% if attribute.type == :integer or attribute.type == :date -%>
+          <td><div class = 'w3-center'><%%= <%= singular_table_name %>.<%= attribute.name %> %></div></td>
+        <% else -%>
+          <td><div><%%= <%= singular_table_name %>.<%= attribute.name %> %></div></td>
+        <% end -%>
 <% end -%>
         <td><%%= link_to 'Show', <%= singular_table_name %> %></td>
         <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_path(<%= singular_table_name %>) %></td>
