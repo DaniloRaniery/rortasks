@@ -21,8 +21,14 @@
     <%%= f.label :password_confirmation %><br>
     <%%= f.password_field :password_confirmation %>
 <% else -%>
-    <%%= f.label :<%= attribute.column_name %> %><br>
-    <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+    <% if attribute.name == 'description' -%>
+      <%%= f.text_area(:<%=attribute.column_name %>, cols: 50 , rows: 8) %>
+    <% elsif attribute.name == 'summary' -%>
+      <%%= f.text_area(:<%=attribute.column_name%>, cols: 50 , rows: 5) %>
+    <% else -%>
+      <%%= f.label :<%= attribute.column_name %> %><br>
+      <%%= f.<%= attribute.field_type %> :<%= attribute.column_name %> %>
+    <% end -%>
 <% end -%>
   </div>
 <% end -%>
@@ -30,3 +36,4 @@
     <%%= f.submit %>
   </div>
 <%% end %>
+
